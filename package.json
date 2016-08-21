@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "4.14.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "typescript": "1.8.10",
+    "gulp-cli": "1.2.2",
+    "gulp-typescript": "2.13.6",
+    "event-stream": "3.3.4"
+  }
+}
