@@ -1,26 +1,20 @@
 /// <reference path="../../typings/typings.d.ts" />
 
-import * as jsonWebToken from "jsonwebtoken";
+import { JsonWebToken } from '../lib/JsonWebToken'
+import { LoginOAuth } from "./messages/LoginOAuth"
 
 export class LoginController {
 
     //Login will be implemented when Login and Password saved in DB
     login(userName, password) {
 
+        if(userName === "test" && password === "password"){
+           return true;
+        }
     }
 
     //OAuth token will be exchanged and login token will be created 
-    loginOAuth() {
-
-        let accessToken = jsonWebToken.sign({}, "xyz1122", {
-            expiresIn: 3600 //set expirty of token 
-        });
-
-        let response = {
-            "accessSucess": true,
-            "accessToken": accessToken
-        };
-
-        return response;
+    loginOAuth(oauth : LoginOAuth) {
+         return new JsonWebToken().create();  
     }
 } 
