@@ -10,6 +10,11 @@ import * as nconf from "nconf";
 let app = express();
 let loginContoller = new LoginController();
 
+//nconf to load values from config json
+nconf.argv()
+   .env()
+   .file({ file: './config.json' });
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -19,23 +24,16 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-nconf.argv()
-   .env()
-   .file({ file: './config.json' });
-
-
-console.log('dburl: ' + nconf.get('dburl'));
-
 //Login route
-app.route('/login')
+app.route('/api/login')
     // TODO: Remove if not required
     // show the form (GET http://localhost:8080/login)
-    .get(function(req, res) {
+    .get((req, res) => {
         res.send('Nothing Nothing to share');
     })
 
     // process the form (POST http://localhost:8080/login)
-    .post(function(req, res) {
+    .post((req, res) => {
         if(req.body.userName && req.body.password){
             let result = loginContoller.login(req.body.userName, req.body.password);
             res.send(result);
