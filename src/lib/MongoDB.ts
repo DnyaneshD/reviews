@@ -8,7 +8,7 @@ export class MongoDB{
      url = nconf.get('dburl');
 
     create(entity): Promise<any>{
-      return new Promise((resolve,reject) =>{
+      return new Promise((resolve,reject) => {
         
         this.mongoClient.connect(this.url, (err,db)=>{
         

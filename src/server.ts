@@ -2,13 +2,16 @@
 
 import * as express from "express";
 import { LoginController } from './application/LoginController';
+import { ReviewController } from './application/ReviewController';
 import * as bodyParser from "body-parser";
 import * as jsonWebToken from "jsonwebtoken";
 import { LoginOAuth } from "./application/messages/LoginOAuth"
+import { Review } from "./application/messages/Review"
 import * as nconf from "nconf";
 
 let app = express();
-let loginContoller = new LoginController();
+let loginController = new LoginController();
+let reviewController = new ReviewController();
 
 //nconf to load values from config json
 nconf.argv()
@@ -35,7 +38,7 @@ app.route('/api/login')
     // process the form (POST http://localhost:8080/login)
     .post((req, res) => {
         if(req.body.userName && req.body.password){
-            let result = loginContoller.login(req.body.userName, req.body.password);
+            let result = loginController.login(req.body.userName, req.body.password);
             res.send(result);
         }
         if(req.body.profileId){
@@ -46,9 +49,21 @@ app.route('/api/login')
             oauth.name  = req.body.name ; 
             oauth.profileId = req.body.profileId; 
 
-            let token = loginContoller.loginOAuth(oauth);
+            let token = loginController.loginOAuth(oauth);
             res.send(token);
         }
+    });
+
+app.route('/api/review')
+    .get((req, res) =>{
+        res.send('No reviews found');
+    })
+    .post((req, res)=>{
+       let review = new Review();
+       review.topic = req.body.topic;
+       review.details = req.body.details;
+       
+       res.send(reviewController.save(review));
     });
 
 app.listen(3000);
