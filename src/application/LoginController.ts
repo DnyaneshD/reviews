@@ -18,7 +18,7 @@ export class LoginController {
     //OAuth token will be exchanged and login token will be created 
     loginOAuth(oauth : LoginOAuth): any {
          new Promise((resolve,reject) =>{
-             new MongoDB().create(oauth).then((result)=>{
+             new MongoDB().create(oauth,'LoginDetails').then((result)=>{
                resolve();
              });
          }).then(()=>{

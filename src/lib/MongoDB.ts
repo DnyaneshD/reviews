@@ -7,12 +7,12 @@ export class MongoDB{
      mongoClient = db.MongoClient;
      url = nconf.get('dburl');
 
-    create(entity): Promise<any>{
+    create(entity:any, collectionName: string): Promise<any>{
       return new Promise((resolve,reject) => {
         
         this.mongoClient.connect(this.url, (err,db)=>{
         
-        let loginDetails = db.collection('LoginDetails');
+        let loginDetails = db.collection(collectionName);
           loginDetails.insert(entity,(err,result)=>{
             resolve(result); 
           });
