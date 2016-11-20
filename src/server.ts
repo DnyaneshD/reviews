@@ -8,6 +8,7 @@ import * as jsonWebToken from "jsonwebtoken";
 import { LoginOAuth } from "./application/messages/LoginOAuth"
 import { Review } from "./application/messages/Review"
 import * as nconf from "nconf";
+import * as shortid from "shortid"
 
 let app = express();
 let loginController = new LoginController();
@@ -49,21 +50,35 @@ app.route('/api/login')
             oauth.name  = req.body.name ; 
             oauth.profileId = req.body.profileId; 
 
-            let token = loginController.loginOAuth(oauth);
-            res.send(token);
+            loginController.loginOAuth(oauth).then((token) =>{
+               res.send(token);
+            });
         }
     });
 
 app.route('/api/review')
     .get((req, res) =>{
-        res.send('No reviews found');
+        reviewController.getOne(req.body.id).then((result)=>{
+           res.send(result);
+        });
     })
     .post((req, res)=>{
+       
        let review = new Review();
+       review.id = shortid.generate();
        review.topic = req.body.topic;
        review.details = req.body.details;
+       review.votes = req.body.votes;
+       review.lastUpdated = new Date();
        
        res.send(reviewController.save(review));
+    });
+
+app.route('/api/reviews')
+    .get((req, res) =>{
+        reviewController.getAll().then((result)=>{
+           res.send(result);
+        });
     });
 
 app.listen(3000);

@@ -16,15 +16,18 @@ export class LoginController {
     }
 
     //OAuth token will be exchanged and login token will be created 
-    loginOAuth(oauth : LoginOAuth): any {
-         new Promise((resolve,reject) =>{
+    loginOAuth(oauth : LoginOAuth): Promise<any> {
+         
+        return  new Promise<any>((resolve,reject) =>{
+             console.log('LoginController::loginOAuth - Login request handled');
              new MongoDB().create(oauth,'LoginDetails').then((result)=>{
-               resolve();
-             });
-         }).then(()=>{
-            return new JsonWebToken().create();  
-         }).catch((err)=>{
-             console.log(err);
-         });  
+                 console.log('LoginController::loginOAuth - Login request resolving');
+             }).then(()=>{
+                 let result = new JsonWebToken().create(); 
+                 resolve(result);  
+            }).catch((err)=>{
+                console.log(err);
+            });  
+        });
     }
 } 

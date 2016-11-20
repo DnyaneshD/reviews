@@ -16,4 +16,25 @@ export class ReviewController {
              console.log(err);
          });  
     }
+    
+    getAll(): Promise<any> {
+        return new Promise((resolve,reject) =>{
+             new MongoDB().find('Review').then((result)=>{
+               resolve(result);
+             });
+         }).catch((err)=>{
+             console.log(err);
+         });  
+    }
+
+    getOne(reviewId: string): Promise<any> {
+        return new Promise((resolve,reject) =>{
+             new MongoDB().findOne('Review',reviewId).then((result)=>{
+               resolve(result);
+             });
+         }).catch((err)=>{
+             console.log(err);
+         });  
+    }
+    
 } 

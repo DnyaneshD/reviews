@@ -31,11 +31,11 @@ describe('LoginController', function() {
     var loginController = new LoginController();
     
     //Act
-    let result = loginController.loginOAuth(oauth);
-
-    //Asset
-    expect(result.accessSucess).to.equal(true);
-    expect(result.accessToken).to.not.null;
+    loginController.loginOAuth(oauth).then((result) =>{
+        //Asset
+        expect(result.accessSucess).to.equal(true);
+        expect(result.accessToken).to.not.null;
+    });
   }); 
 
 });

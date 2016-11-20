@@ -5,3 +5,4 @@
 /// <reference path="./mocha/mocha.d.ts" />
 /// <reference path="./nconf/nconf.d.ts" />
 /// <reference path="./mongodb/mongodb.d.ts" />
+/// <reference path="./shortid/shortid.d.ts" />

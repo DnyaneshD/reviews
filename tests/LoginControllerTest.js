@@ -22,9 +22,10 @@ describe('LoginController', function () {
         oauth.profileId = 'pRoFiLE010103029230ID';
         var loginController = new LoginController_1.LoginController();
         //Act
-        var result = loginController.loginOAuth(oauth);
-        //Asset
-        expect(result.accessSucess).to.equal(true);
-        expect(result.accessToken).to.not.null;
+        loginController.loginOAuth(oauth).then(function (result) {
+            //Asset
+            expect(result.accessSucess).to.equal(true);
+            expect(result.accessToken).to.not.null;
+        });
     });
 });

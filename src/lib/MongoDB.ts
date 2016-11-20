@@ -12,8 +12,34 @@ export class MongoDB{
         
         this.mongoClient.connect(this.url, (err,db)=>{
         
+          db.collection(collectionName).insert(entity,(err,result)=>{
+            resolve(result); 
+          });
+
+        });
+      });
+    }
+
+    find(collectionName: string): Promise<any>{
+      return new Promise((resolve,reject)=>{
+
+        this.mongoClient.connect(this.url, (err,db)=>{
+        
         let loginDetails = db.collection(collectionName);
-          loginDetails.insert(entity,(err,result)=>{
+          db.collection(collectionName).find({}).toArray((err, result) =>{
+            resolve(result); 
+          });
+        });
+      });
+    }
+
+    findOne(collectionName: string, reviewId: string): Promise<any>{
+      return new Promise((resolve,reject)=>{
+
+        this.mongoClient.connect(this.url, (err,db)=>{
+        
+        let loginDetails = db.collection(collectionName);
+          db.collection(collectionName).findOne({id: reviewId}, (err, result) =>{
             resolve(result); 
           });
         });
