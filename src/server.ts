@@ -56,9 +56,9 @@ app.route('/api/login')
         }
     });
 
-app.route('/api/review')
+app.route('/api/review/:id')
     .get((req, res) =>{
-        reviewController.getOne(req.body.id).then((result)=>{
+        reviewController.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     })

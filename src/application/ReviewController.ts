@@ -36,5 +36,4 @@ export class ReviewController {
              console.log(err);
          });  
     }
-    
 } 
