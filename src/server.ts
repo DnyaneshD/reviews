@@ -5,10 +5,11 @@ import { LoginController } from './application/LoginController';
 import { ReviewController } from './application/ReviewController';
 import * as bodyParser from "body-parser";
 import * as jsonWebToken from "jsonwebtoken";
-import { LoginOAuth } from "./application/messages/LoginOAuth"
-import { Review } from "./application/messages/Review"
+import { LoginOAuth } from "./application/messages/LoginOAuth";
+import { ReviewDocument } from "./application/messages/ReviewDocument";
+import { SocialReview } from "./application/messages/SocialReview";
 import * as nconf from "nconf";
-import * as shortid from "shortid"
+import * as shortid from "shortid";
 
 let app = express();
 let loginController = new LoginController();
@@ -62,17 +63,48 @@ app.route('/api/review/:id')
            res.send(result);
         });
     })
+    .put((req, res)=>{
+       
+       let review = new ReviewDocument();
+       review.id = req.body.id;
+       review.topic = req.body.topic;
+       review.autherReview = req.body.autherReview;
+       review.votes = req.body.votes;
+       review.lastUpdated = new Date();
+       
+       res.send(reviewController.update(review));
+    })
     .post((req, res)=>{
        
-       let review = new Review();
+       let review = new ReviewDocument();
        review.id = shortid.generate();
        review.topic = req.body.topic;
-       review.details = req.body.details;
+       review.autherReview = req.body.autherReview;
        review.votes = req.body.votes;
        review.lastUpdated = new Date();
        
        res.send(reviewController.save(review));
+    })
+    .delete((req, res) =>{
+        reviewController.getOne(req.params.id).then((result)=>{
+           res.send(result);
+        });
     });
+
+app.route('/api/addreview')
+    .post((req, res)=>{
+        
+        let socialReview = new SocialReview();
+        socialReview.id = shortid.generate();
+        socialReview.review = req.body.socialReview;
+        socialReview.lastUpdated = new Date(); 
+
+        let review = new ReviewDocument();
+        review.id = req.body.id;
+        review.socialReviews.push(socialReview);
+        
+        res.send(reviewController.update(review));
+    });    
 
 app.route('/api/reviews')
     .get((req, res) =>{
