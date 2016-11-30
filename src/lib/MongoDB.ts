@@ -46,12 +46,32 @@ export class MongoDB{
       });
     }
 
-    update(){
+    update(reviewId: string, entity:any, collectionName: string){
+
+       return new Promise((resolve,reject) => {
+        
+        this.mongoClient.connect(this.url, (err,db)=>{
+        
+          db.collection(collectionName).updateOne({id: reviewId},entity,(err,result)=>{
+            resolve(result); 
+          });
+
+        });
+      });
 
     }
 
-    delete(){
+    delete(collectionName: string, reviewId: string): Promise<any>{
+         return new Promise((resolve,reject)=>{
+
+        this.mongoClient.connect(this.url, (err,db)=>{
         
+        let loginDetails = db.collection(collectionName);
+          db.collection(collectionName).deleteOne({id: reviewId}, (err, result) =>{
+            resolve(result); 
+          });
+        });
+      });
     }
 
     connect(){

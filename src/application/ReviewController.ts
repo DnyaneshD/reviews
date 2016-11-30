@@ -1,15 +1,25 @@
 /// <reference path="../../typings/typings.d.ts" />
 
 import { MongoDB } from '../lib/MongoDB'
-import { Review } from "./messages/Review";
+import { ReviewDocument } from "./messages/ReviewDocument";
 
 
 export class ReviewController {
 
     //OAuth token will be exchanged and login token will be created 
-    save(reviewEntity : Review): any {
+    save(reviewEntity : ReviewDocument): any {
          new Promise((resolve,reject) =>{
              new MongoDB().create(reviewEntity,'Review').then((result)=>{
+               resolve();
+             });
+         }).catch((err)=>{
+             console.log(err);
+         });  
+    }
+
+     update(reviewEntity:ReviewDocument): any {
+         new Promise((resolve,reject) =>{
+             new MongoDB().update(reviewEntity.id,reviewEntity,'Review').then((result)=>{
                resolve();
              });
          }).catch((err)=>{
@@ -28,6 +38,16 @@ export class ReviewController {
     }
 
     getOne(reviewId: string): Promise<any> {
+        return new Promise((resolve,reject) =>{
+             new MongoDB().findOne('Review',reviewId).then((result)=>{
+               resolve(result);
+             });
+         }).catch((err)=>{
+             console.log(err);
+         });  
+    }
+
+    delete(reviewId: string): Promise<any> {
         return new Promise((resolve,reject) =>{
              new MongoDB().findOne('Review',reviewId).then((result)=>{
                resolve(result);
