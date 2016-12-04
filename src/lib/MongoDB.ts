@@ -58,7 +58,6 @@ export class MongoDB{
 
         });
       });
-
     }
 
     delete(collectionName: string, reviewId: string): Promise<any>{
@@ -68,6 +67,20 @@ export class MongoDB{
         
         let loginDetails = db.collection(collectionName);
           db.collection(collectionName).deleteOne({id: reviewId}, (err, result) =>{
+            resolve(result); 
+          });
+        });
+      });
+    }
+
+    //This is exception to the generic library and need to worked on in order to clean up
+    addSocialReview(reviewId: string, entity:any, collectionName: string){
+
+       return new Promise((resolve,reject) => {
+        
+        this.mongoClient.connect(this.url, (err,db)=>{
+        
+          db.collection(collectionName).updateOne({id: reviewId},{$push: { socialReviews:{ entity } }},(err,result)=>{
             resolve(result); 
           });
         });

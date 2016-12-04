@@ -57,23 +57,23 @@ app.route('/api/login')
         }
     });
 
-app.route('/api/review/:id')
+app.route('/api/review')
     .get((req, res) =>{
         reviewController.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     })
-    .put((req, res)=>{
+    // `.put((req, res)=>{
        
-       let review = new ReviewDocument();
-       review.id = req.body.id;
-       review.topic = req.body.topic;
-       review.autherReview = req.body.autherReview;
-       review.votes = req.body.votes;
-       review.lastUpdated = new Date();
+    //    let review = new ReviewDocument();
+    //    review.id = req.body.id;
+    //    review.topic = req.body.topic;
+    //    review.autherReview = req.body.autherReview;
+    //    review.votes = req.body.votes;
+    //    review.lastUpdated = new Date();
        
-       res.send(reviewController.update(review));
-    })
+    //    res.send(reviewController.update(review));
+    // }``
     .post((req, res)=>{
        
        let review = new ReviewDocument();
@@ -91,7 +91,7 @@ app.route('/api/review/:id')
         });
     });
 
-app.route('/api/addreview')
+app.route('/api/addsocialreview')
     .post((req, res)=>{
         
         let socialReview = new SocialReview();
@@ -99,16 +99,13 @@ app.route('/api/addreview')
         socialReview.review = req.body.socialReview;
         socialReview.lastUpdated = new Date(); 
 
-        let review = new ReviewDocument();
-        review.id = req.body.id;
-        review.socialReviews.push(socialReview);
         
-        res.send(reviewController.update(review));
+        res.send(reviewController.addSocailReview(socialReview));
     });    
 
-app.route('/api/reviews')
+app.route('/api/review/:id')
     .get((req, res) =>{
-        reviewController.getAll().then((result)=>{
+        reviewController.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     });

@@ -2,7 +2,7 @@
 
 import { MongoDB } from '../lib/MongoDB'
 import { ReviewDocument } from "./messages/ReviewDocument";
-
+import { SocialReview } from './messages/SocialReview';
 
 export class ReviewController {
 
@@ -52,6 +52,16 @@ export class ReviewController {
         return new Promise((resolve,reject) =>{
              new MongoDB().findOne('Review',reviewId).then((result)=>{
                resolve(result);
+             });
+         }).catch((err)=>{
+             console.log(err);
+         });  
+    }
+
+    addSocailReview(reviewEntity:SocialReview): any {
+         new Promise((resolve,reject) =>{
+             new MongoDB().update(reviewEntity.id,reviewEntity,'Review').then((result)=>{
+               resolve();
              });
          }).catch((err)=>{
              console.log(err);
