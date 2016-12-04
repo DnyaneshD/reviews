@@ -5,4 +5,6 @@ export class SocialReview{
     review: string = '';
     lastUpdated: Date = new Date();
     user: User = new User();
+    //Review id 
+    reviewId :string   = '';
 }

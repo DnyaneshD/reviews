@@ -3,6 +3,7 @@
 import * as express from "express";
 import { LoginController } from './application/LoginController';
 import { ReviewController } from './application/ReviewController';
+import { SocialReviewController } from './application/SocialReviewController';
 import * as bodyParser from "body-parser";
 import * as jsonWebToken from "jsonwebtoken";
 import { LoginOAuth } from "./application/messages/LoginOAuth";
@@ -14,6 +15,7 @@ import * as shortid from "shortid";
 let app = express();
 let loginController = new LoginController();
 let reviewController = new ReviewController();
+let socialReviewController = new SocialReviewController();
 
 //nconf to load values from config json
 nconf.argv()
@@ -63,17 +65,7 @@ app.route('/api/review')
            res.send(result);
         });
     })
-    // `.put((req, res)=>{
-       
-    //    let review = new ReviewDocument();
-    //    review.id = req.body.id;
-    //    review.topic = req.body.topic;
-    //    review.autherReview = req.body.autherReview;
-    //    review.votes = req.body.votes;
-    //    review.lastUpdated = new Date();
-       
-    //    res.send(reviewController.update(review));
-    // }``
+ 
     .post((req, res)=>{
        
        let review = new ReviewDocument();
@@ -98,9 +90,13 @@ app.route('/api/addsocialreview')
         socialReview.id = shortid.generate();
         socialReview.review = req.body.socialReview;
         socialReview.lastUpdated = new Date(); 
+      
+        socialReview.reviewId = req.body.id; 
 
-        
-        res.send(reviewController.addSocailReview(socialReview));
+        socialReviewController.addSocailReview(socialReview).then(() =>{
+             res.send();
+        });
+       
     });    
 
 app.route('/api/review/:id')
@@ -109,5 +105,12 @@ app.route('/api/review/:id')
            res.send(result);
         });
     });
+
+app.route('/api/reviews')
+    .get((req, res) =>{
+        reviewController.getAll().then((result)=>{
+           res.send(result);
+        });
+    });    
 
 app.listen(3000);

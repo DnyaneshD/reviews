@@ -46,16 +46,15 @@ export class MongoDB{
       });
     }
 
-    update(reviewId: string, entity:any, collectionName: string){
+    update(id: string, entity:any, collectionName: string){
 
        return new Promise((resolve,reject) => {
         
         this.mongoClient.connect(this.url, (err,db)=>{
         
-          db.collection(collectionName).updateOne({id: reviewId},entity,(err,result)=>{
+          db.collection(collectionName).update({id: id},entity,(err,result)=>{
             resolve(result); 
           });
-
         });
       });
     }
