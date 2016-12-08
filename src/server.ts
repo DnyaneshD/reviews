@@ -108,9 +108,12 @@ app.route('/api/review/:id')
 
 app.route('/api/reviews')
     .get((req, res) =>{
+        res.writeHead(200, {'Content-Type': 'text/event-stream'});
         reviewController.getAll().then((result)=>{
            res.send(result);
         });
     });    
 
 app.listen(3000);
+
+module.exports = app;

@@ -1,8 +1,8 @@
-/// <reference path="../typings/typings.d.ts" />
+/// <reference path="../../typings/typings.d.ts" />
 
 import * as chai from "chai";
-import { LoginController } from "../src/application/LoginController"
-import { LoginOAuth } from "../src/application/messages/LoginOAuth"
+import { LoginController } from "../../src/application/LoginController"
+import { LoginOAuth } from "../../src/application/messages/LoginOAuth"
 
 const expect = chai.expect;
 

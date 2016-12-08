@@ -1,8 +1,8 @@
-/// <reference path="../typings/typings.d.ts" />
+/// <reference path="../../typings/typings.d.ts" />
 "use strict";
 var chai = require("chai");
-var LoginController_1 = require("../src/application/LoginController");
-var LoginOAuth_1 = require("../src/application/messages/LoginOAuth");
+var LoginController_1 = require("../../src/application/LoginController");
+var LoginOAuth_1 = require("../../src/application/messages/LoginOAuth");
 var expect = chai.expect;
 describe('LoginController', function () {
     it('Login test with userName and password', function () {
