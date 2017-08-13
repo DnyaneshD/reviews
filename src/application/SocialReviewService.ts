@@ -2,7 +2,7 @@ import { MongoDB } from '../lib/MongoDB'
 import { ReviewDocument } from "./messages/ReviewDocument";
 import { SocialReview } from './messages/SocialReview';
 
-export class SocialReviewController {
+export class SocialReviewService {
     
     addSocailReview(reviewEntity:SocialReview): Promise<any> {
          let mongoDB =  new MongoDB();

@@ -4,7 +4,7 @@ import { MongoDB } from '../lib/MongoDB'
 import { ReviewDocument } from "./messages/ReviewDocument";
 import { SocialReview } from './messages/SocialReview';
 
-export class ReviewController {
+export class ReviewService {
 
     //OAuth token will be exchanged and login token will be created 
     save(reviewEntity : ReviewDocument): any {
