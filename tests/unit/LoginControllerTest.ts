@@ -1,7 +1,7 @@
 /// <reference path="../../typings/typings.d.ts" />
 
 import * as chai from "chai";
-import { LoginController } from "../../src/application/LoginController"
+import { LoginService } from "../../src/application/LoginService"
 import { LoginOAuth } from "../../src/application/messages/LoginOAuth"
 
 const expect = chai.expect;
@@ -10,7 +10,7 @@ describe('LoginController', function() {
   it('Login test with userName and password', function() {
     
     //Arrange 
-    var loginController = new LoginController();
+    var loginController = new LoginService();
     
     //Act
     let result = loginController.login("test", "password")
@@ -28,7 +28,7 @@ describe('LoginController', function() {
     oauth.name  = 'testName' ; 
     oauth.profileId = 'pRoFiLE010103029230ID';
 
-    var loginController = new LoginController();
+    var loginController = new LoginService();
     
     //Act
     loginController.loginOAuth(oauth).then((result) =>{
