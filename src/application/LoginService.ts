@@ -5,7 +5,7 @@ import { MongoDB } from '../lib/MongoDB'
 import { LoginOAuth } from "./messages/LoginOAuth";
 
 
-export class LoginController {
+export class LoginService {
 
     //Login will be implemented when Login and Password saved in DB
     login(userName, password) {

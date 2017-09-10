@@ -1,9 +1,9 @@
 /// <reference path="../typings/typings.d.ts" />
 
 import * as express from "express";
-import { LoginController } from './application/LoginController';
-import { ReviewController } from './application/ReviewController';
-import { SocialReviewController } from './application/SocialReviewController';
+import { LoginService } from './application/LoginService';
+import { ReviewService } from './application/ReviewService';
+import { SocialReviewService } from './application/SocialReviewService';
 import * as bodyParser from "body-parser";
 import * as jsonWebToken from "jsonwebtoken";
 import { LoginOAuth } from "./application/messages/LoginOAuth";
@@ -13,9 +13,9 @@ import * as nconf from "nconf";
 import * as shortid from "shortid";
 
 let app = express();
-let loginController = new LoginController();
-let reviewController = new ReviewController();
-let socialReviewController = new SocialReviewController();
+let loginService = new LoginService();
+let reviewService = new ReviewService();
+let socialReviewService = new SocialReviewService();
 
 //nconf to load values from config json
 nconf.argv()
@@ -42,7 +42,7 @@ app.route('/api/login')
     // process the form (POST http://localhost:8080/login)
     .post((req, res) => {
         if(req.body.userName && req.body.password){
-            let result = loginController.login(req.body.userName, req.body.password);
+            let result = loginService.login(req.body.userName, req.body.password);
             res.send(result);
         }
         if(req.body.profileId){
@@ -53,7 +53,7 @@ app.route('/api/login')
             oauth.name  = req.body.name ; 
             oauth.profileId = req.body.profileId; 
 
-            loginController.loginOAuth(oauth).then((token) =>{
+            loginService.loginOAuth(oauth).then((token) =>{
                res.send(token);
             });
         }
@@ -61,7 +61,7 @@ app.route('/api/login')
 
 app.route('/api/review')
     .get((req, res) =>{
-        reviewController.getOne(req.params.id).then((result)=>{
+        reviewService.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     })
@@ -75,10 +75,10 @@ app.route('/api/review')
        review.votes = req.body.votes;
        review.lastUpdated = new Date();
        
-       res.send(reviewController.save(review));
+       res.send(reviewService.save(review));
     })
     .delete((req, res) =>{
-        reviewController.getOne(req.params.id).then((result)=>{
+        reviewService.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     });
@@ -93,7 +93,7 @@ app.route('/api/addsocialreview')
       
         socialReview.reviewId = req.body.id; 
 
-        socialReviewController.addSocailReview(socialReview).then(() =>{
+        socialReviewService.addSocailReview(socialReview).then(() =>{
              res.send();
         });
        
@@ -101,7 +101,7 @@ app.route('/api/addsocialreview')
 
 app.route('/api/review/:id')
     .get((req, res) =>{
-        reviewController.getOne(req.params.id).then((result)=>{
+        reviewService.getOne(req.params.id).then((result)=>{
            res.send(result);
         });
     });
@@ -109,7 +109,7 @@ app.route('/api/review/:id')
 app.route('/api/reviews')
     .get((req, res) =>{
         res.writeHead(200, {'Content-Type': 'text/event-stream'});
-        reviewController.getAll().then((result)=>{
+        reviewService.getAll().then((result)=>{
            res.send(result);
         });
     });    
