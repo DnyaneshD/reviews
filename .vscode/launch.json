@@ -39,7 +39,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "stopOnEntry": false,
-            "args": ["tests/integration/server.js"], //you can specify paths to specific tests here
+            "args": ["tests/unit/SocialReviewControllerTest.js"], //you can specify paths to specific tests here
             "cwd": "${workspaceRoot}",
             "runtimeExecutable": null,
             "env": {

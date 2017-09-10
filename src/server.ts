@@ -36,7 +36,7 @@ app.route('/api/login')
     // TODO: Remove if not required
     // show the form (GET http://localhost:8080/login)
     .get((req, res) => {
-        res.send('Nothing Nothing to share');
+        res.send('Nothing to share');
     })
 
     // process the form (POST http://localhost:8080/login)
