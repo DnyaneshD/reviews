@@ -10,7 +10,7 @@ export class LoginService {
     //Login will be implemented when Login and Password saved in DB
     login(userName, password) {
 
-        if(userName === "test" && password === "password"){
+        if(userName === "test" && password === "test"){
            return true;
         }
     }
