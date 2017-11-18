@@ -7,7 +7,7 @@ var expect = chai.expect;
 describe('LoginController', function () {
     it('Login test with userName and password', function () {
         //Arrange 
-        var loginService = new LoginService_1.LoginService();
+        var loginController = new LoginService_1.LoginService();
         //Act
         var result = loginService.login("test", "password");
         //Assert
