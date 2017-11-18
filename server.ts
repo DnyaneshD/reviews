@@ -1,14 +1,14 @@
-/// <reference path="../typings/typings.d.ts" />
+/// <reference path="./typings/typings.d.ts" />
 
 import * as express from "express";
-import { LoginService } from './application/LoginService';
-import { ReviewService } from './application/ReviewService';
-import { SocialReviewService } from './application/SocialReviewService';
+import { LoginService } from './src/application/LoginService';
+import { ReviewService } from './src/application/ReviewService';
+import { SocialReviewService } from './src/application/SocialReviewService';
 import * as bodyParser from "body-parser";
 import * as jsonWebToken from "jsonwebtoken";
-import { LoginOAuth } from "./application/messages/LoginOAuth";
-import { ReviewDocument } from "./application/messages/ReviewDocument";
-import { SocialReview } from "./application/messages/SocialReview";
+import { LoginOAuth } from "./src/application/messages/LoginOAuth";
+import { ReviewDocument } from "./src/application/messages/ReviewDocument";
+import { SocialReview } from "./src/application/messages/SocialReview";
 import * as nconf from "nconf";
 import * as shortid from "shortid";
 

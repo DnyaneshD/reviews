@@ -1,5 +1,5 @@
 "use strict";
-var server = require("../../src/server");
+var server = require("./server");
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);

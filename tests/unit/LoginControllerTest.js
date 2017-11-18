@@ -1,15 +1,15 @@
 /// <reference path="../../typings/typings.d.ts" />
 "use strict";
 var chai = require("chai");
-var LoginController_1 = require("../../src/application/LoginController");
+var LoginService_1 = require("../../src/application/LoginService");
 var LoginOAuth_1 = require("../../src/application/messages/LoginOAuth");
 var expect = chai.expect;
 describe('LoginController', function () {
     it('Login test with userName and password', function () {
         //Arrange 
-        var loginController = new LoginController_1.LoginController();
+        var loginService = new LoginService_1.LoginService();
         //Act
-        var result = loginController.login("test", "password");
+        var result = loginService.login("test", "password");
         //Assert
         expect(result).to.equal(true);
     });
@@ -20,7 +20,7 @@ describe('LoginController', function () {
         oauth.imageUrl = 'test/image/url';
         oauth.name = 'testName';
         oauth.profileId = 'pRoFiLE010103029230ID';
-        var loginController = new LoginController_1.LoginController();
+        var loginController = new LoginService_1.LoginService();
         //Act
         loginController.loginOAuth(oauth).then(function (result) {
             //Asset

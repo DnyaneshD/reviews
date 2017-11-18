@@ -1,5 +1,5 @@
 
-import * as server  from "../../src/server";
+import * as server  from "./server";
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 chai.use(chaiHttp);
