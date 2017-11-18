@@ -2,21 +2,41 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "4.14.0",
-    "jsonwebtoken": "^7.1.9"
+    "jsonwebtoken": "^7.1.9",
+    "nconf": "0.8.4",
+    "sinon": "1.17.6",
+    "mongodb": "2.2.10",
+    "es6-promise": "3.3.1",
+    "shortid": "2.2.6",
+    "event-stream": "3.3.4"
   },
   "devDependencies": {
     "gulp": "3.9.1",
     "typescript": "1.8.10",
     "gulp-cli": "1.2.2",
-    "gulp-typescript": "2.13.6",
-    "event-stream": "3.3.4",
-    "mocha":"2.2.5",
+    "gulp-typescript": "2.13.6",  
+    "mocha": "2.2.5",
     "chai": "^3.4.0",
-    "chai-http": "3.0.0",
-    "nconf": "0.8.4",
-    "sinon":"1.17.6",
-    "mongodb": "2.2.10",
-    "es6-promise": "3.3.1",
-    "shortid": "2.2.6"
-  }
+    "chai-http": "3.0.0"
+  },
+  "name": "reviews",
+  "description": "This repository is collection of API and UI",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DnyaneshD/reviews.git"
+  },
+  "author": "Dnyanesh Deshpande",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DnyaneshD/reviews/issues"
+  },
+  "homepage": "https://github.com/DnyaneshD/reviews#readme"
 }
