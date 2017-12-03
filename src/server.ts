@@ -37,6 +37,7 @@ app.route('/api/login')
     // show the form (GET http://localhost:8080/login)
     .get((req, res) => {
         res.send('Nothing to share');
+        res.status(200);
     })
 
     // process the form (POST http://localhost:8080/login)
