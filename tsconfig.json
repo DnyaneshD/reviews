@@ -1,9 +1,38 @@
 {
-    "files": [
-        "./**/*.ts"
-    ],
-    "compilerOptions": {
-        "noImplicitAny": true,
-        "target": "es5"
-    }
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": false,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true
+  }
 }
+
+
+// {
+//   "files": [
+//     "./src/server.ts"
+//   ],
+//   "include": [
+//     "src/**/*.ts"
+//   ],
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "noImplicitAny": true,
+//     "target": "es6",
+//     "outDir": "dist",
+//     "rootDir": "server",
+//     "sourceMap": true,
+//     "baseUrl": ".",
+//     "moduleResolution": "node",
+//     "removeComments": true,
+//     "typeRoots": [ "node_modules/@types" ],
+//     "paths": {
+//       "*": [
+//         "node_modules/@types/*",
+//         "./server/types/*"
+//       ]
+//     }
+//   }
+// }

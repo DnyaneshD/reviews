@@ -8,7 +8,7 @@ import { LoginOAuth } from "./messages/LoginOAuth";
 export class LoginService {
 
     //Login will be implemented when Login and Password saved in DB
-    login(userName, password) {
+    login(userName: any, password: any) {
 
         if(userName === "test" && password === "password"){
            return true;

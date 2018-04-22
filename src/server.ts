@@ -25,6 +25,7 @@ nconf.argv()
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
 
@@ -78,6 +79,17 @@ app.route('/api/review')
        
        res.send(reviewService.save(review));
     })
+    .put((req, res)=>{
+       
+        let review = new ReviewDocument();
+        review.id = req.body.Id;
+        review.topic = req.body.topic;
+        review.autherReview = req.body.autherReview;
+        review.votes = req.body.votes;
+        review.lastUpdated = new Date();
+        
+        res.send(reviewService.update(review));
+     })
     .delete((req, res) =>{
         reviewService.getOne(req.params.id).then((result)=>{
            res.send(result);
@@ -89,10 +101,9 @@ app.route('/api/addsocialreview')
         
         let socialReview = new SocialReview();
         socialReview.id = shortid.generate();
-        socialReview.review = req.body.socialReview;
+        socialReview.review = req.body.comment;
         socialReview.lastUpdated = new Date(); 
-      
-        socialReview.reviewId = req.body.id; 
+        socialReview.reviewId = req.body.reviewId; 
 
         socialReviewService.addSocailReview(socialReview).then(() =>{
              res.send();
@@ -109,12 +120,12 @@ app.route('/api/review/:id')
 
 app.route('/api/reviews')
     .get((req, res) =>{
-        res.writeHead(200, {'Content-Type': 'text/event-stream'});
+        //res.writeHead(200, {'Content-Type': 'text/event-stream'});
         reviewService.getAll().then((result)=>{
            res.send(result);
         });
     });    
 
-app.listen(3000);
+app.listen(3002);
 
-module.exports = app;
+export default app;
